@@ -1,10 +1,10 @@
-import PdfUpload from "../_components/PdfUpload";
+import UrlUpload from "../_components/UrlUpload";
 
 const JobSeekerMatch = () => {
   return (
     <>
       <h1>求職者マッチ</h1>
-      <PdfUpload />
+      <UrlUpload />
     </>
   );
 };

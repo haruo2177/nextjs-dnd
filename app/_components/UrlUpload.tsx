@@ -12,7 +12,7 @@ const formSchema = z.object({
   url: z.string().url({ message: "読み取りに失敗しました。URLに間違いが無いかご確認ください" }),
 });
 
-const PdfUpload = () => {
+const UrlUpload = () => {
   const [pdfData, setPdfData] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -74,4 +74,4 @@ const PdfUpload = () => {
   );
 };
 
-export default PdfUpload;
+export default UrlUpload;

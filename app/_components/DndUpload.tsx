@@ -3,7 +3,7 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-const FileUpload = () => {
+const DndUpload = () => {
   const [pdfFile, setPdfFile] = useState<string | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -30,4 +30,4 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+export default DndUpload;
