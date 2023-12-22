@@ -3,35 +3,29 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-interface FileWithPreview extends File {
-  preview: string;
-}
-
 const FileUpload = () => {
-  const [file, setFile] = useState<File>();
+  const [pdfFile, setPdfFile] = useState<string | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFile(acceptedFiles[0]);
+    // Filter for PDF files
+    const pdf = acceptedFiles.find((file) => file.type === "application/pdf");
+    if (pdf) {
+      setPdfFile(URL.createObjectURL(pdf));
+    }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: false });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: { "application/pdf": [".pdf"] },
+  });
 
   return (
-    <div {...getRootProps()} style={{ border: "2px dashed #ccc", padding: "20px", textAlign: "center" }}>
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>ファイルをここにドロップ...</p>
-      ) : (
-        <p>ファイルをドラッグアンドドロップ、またはクリックして選択</p>
-      )}
-      {file && (
-        <aside>
-          <h4>アップロードされたファイル:</h4>
-          <p>
-            {file.name} - {file.size} bytes
-          </p>
-        </aside>
-      )}
+    <div>
+      <div {...getRootProps()} style={{ border: "1px dashed black", padding: "20px", textAlign: "center" }}>
+        <input {...getInputProps()} />
+        <p>PDFをアップロードしてください</p>
+      </div>
+      {pdfFile && <iframe src={pdfFile} style={{ width: "100%", height: "500px" }} title="PDF Preview"></iframe>}
     </div>
   );
 };
