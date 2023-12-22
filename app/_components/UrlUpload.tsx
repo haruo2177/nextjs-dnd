@@ -15,6 +15,7 @@ const formSchema = z.object({
 const UrlUpload = () => {
   const [pdfData, setPdfData] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("PDFファイルのURLを入力してください");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -27,15 +28,18 @@ const UrlUpload = () => {
       const response = await fetch(values.url);
       const contentType = response.headers.get("Content-Type");
 
-      if (contentType === "application/pdf") {
+      if (contentType !== "application/pdf") {
+        setPdfData(null);
+        setMessage("PDFファイル以外が読み取られました。PDFファイルのURLを入力してください");
+      } else {
         const pdfBlob = await response.blob();
         setPdfData(URL.createObjectURL(pdfBlob));
-      } else {
-        setPdfData(null);
+        setMessage("");
       }
     } catch (error) {
       console.error("Error fetching file:", error);
       setPdfData(null);
+      setMessage("読み取りに失敗しました。URLに間違いが無いかご確認ください");
     } finally {
       setIsLoading(false);
     }
@@ -68,7 +72,7 @@ const UrlUpload = () => {
       ) : pdfData ? (
         <iframe src={pdfData} style={{ width: "100%", height: "500px" }} title="PDF Viewer"></iframe>
       ) : (
-        <div>No PDF loaded</div>
+        <div>{message}</div>
       )}
     </div>
   );
