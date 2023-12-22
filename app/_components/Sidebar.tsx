@@ -2,16 +2,12 @@ import Link from "next/link";
 
 const menus = [
   {
-    href: "/path1",
-    label: "メニュー1",
+    href: "/job-postings-match",
+    label: "求人票マッチ",
   },
   {
-    href: "/path2",
-    label: "メニュー2",
-  },
-  {
-    href: "/path3",
-    label: "メニュー3",
+    href: "/job-seeker-match",
+    label: "求職者マッチ",
   },
 ];
 
