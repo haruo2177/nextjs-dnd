@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import Sidebar from "./_components/Sidebar";
 import Link from "next/link";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -21,4 +21,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}
+};
+export default RootLayout;

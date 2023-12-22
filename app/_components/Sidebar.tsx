@@ -11,7 +11,7 @@ const menus = [
   },
 ];
 
-export default function Sidebar() {
+const Sidebar = () => {
   return (
     <aside className="bg-gray-200 w-64 p-4">
       <ul className="space-y-2">
@@ -25,4 +25,6 @@ export default function Sidebar() {
       </ul>
     </aside>
   );
-}
+};
+
+export default Sidebar;
