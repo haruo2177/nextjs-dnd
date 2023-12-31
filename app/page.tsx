@@ -1,7 +1,9 @@
 import Image from "next/image";
 
+const apiBasePath = process.env.VERCEL_URL || "http://localhost:3000";
+
 const Home = async () => {
-  const { message } = await fetch(`http://localhost:3000/api`).then((res) => res.json());
+  const { message } = await fetch(`${apiBasePath}/api`).then((res) => res.json());
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
