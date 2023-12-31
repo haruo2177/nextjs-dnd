@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const apiBasePath = process.env.VERCEL_URL || "http://localhost:3000";
+const apiBasePath = `https://${process.env.VERCEL_URL}` || "http://localhost:3000";
 
 const Home = async () => {
   const { message } = await fetch(`${apiBasePath}/api`).then((res) => res.json());
