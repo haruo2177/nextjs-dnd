@@ -2,16 +2,24 @@
 
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { z } from "zod";
+
+const Message = z.object({ message: z.string() });
 
 const DndUpload = () => {
   const [pdfFile, setPdfFile] = useState<string | null>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     // Filter for PDF files
     const pdf = acceptedFiles.find((file) => file.type === "application/pdf");
     if (pdf) {
       setPdfFile(URL.createObjectURL(pdf));
     }
+
+    // API Test
+    const response = await fetch("/api/hello");
+    const { message } = Message.parse(await response.json());
+    console.log(message);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
