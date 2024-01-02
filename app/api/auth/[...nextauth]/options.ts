@@ -7,7 +7,7 @@ if (!lineClientId || !lineClientSecret) {
   throw new Error("LINE_CLIENT_ID または LINE_CLIENT_SECRET が設定されていません");
 }
 
-export const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   debug: true,
   session: { strategy: "jwt" },
   providers: [LineProvider({ clientId: lineClientId, clientSecret: lineClientSecret })],

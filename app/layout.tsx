@@ -3,9 +3,11 @@ import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "./_components/Sidebar";
 import Link from "next/link";
-import { AuthButton } from "./_components/AuthButtons";
+import { LogInButton, LogOutButton } from "./_components/AuthButtons";
+import { getServerSession } from "next-auth";
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession();
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -13,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="min-h-screen flex flex-col">
           <header className="bg-blue-500 text-white flex justify-between items-center p-4">
             <Link href="/">アプリタイトル</Link>
-            <AuthButton />
+            {session ? <LogOutButton /> : <LogInButton />}
           </header>
           <div className="flex flex-1">
             <Sidebar />
